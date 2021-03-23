@@ -184,7 +184,7 @@ TTL key                           # returns the number of seconds until a key is
 
 
 # Lists.
-# A list is a series of ordered values.
+
 
 
 RPUSH key value [value ...]           # put the new value at the end of the list
@@ -204,7 +204,6 @@ BRPOP key [key ...] timeout           # remove and get the last element in a lis
 
 
 # Sets.
-# A set is similar to a list, except it does not have a specific order and each element may only appear once. 
 
 
 SADD key member [member ...]     # add the given value to the set
@@ -219,8 +218,6 @@ SPOP key [count]                 # remove and return one or multiple random memb
 
 
 # Sorted Sets
-# A sorted set is similar to a regular set, but now each value has an associated score.
-# This score is used to sort the elements in the set.
 
 
 ZADD key [NX|XX] [CH] [INCR] score member [score member ...]  # add one or more members to a sorted set, or update its score if it already exists
@@ -239,7 +236,7 @@ ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of
 
 
 # Hashes
-# Hashes are maps between string fields and string values, so they are the perfect data type to represent objects.
+
 
 
 HGET key field          # get the value of a hash field
@@ -259,7 +256,6 @@ HVALS key                    # get all the values in a hash
 
 
 # HyperLogLog
-# HyperLogLog uses randomization in order to provide an approximation of the number of unique elements in a set using just a constant, and small, amount of memory
 
 
 PFADD key element [element ...]  # add the specified elements to the specified HyperLogLog
