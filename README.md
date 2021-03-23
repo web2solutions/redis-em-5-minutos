@@ -1,3 +1,6 @@
+<img align="center" src="https://i.imgur.com/KCwv46t.png" width="200" />
+
+
 # Redis em 5 minutos
 
 ## Conceitos
