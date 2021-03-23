@@ -16,16 +16,16 @@ Cenários onde o Redis armazena dados que não são armazenados em nenhum outro 
 
 Como `Mediador de Mensagens`, o Redis implementa o padrão `Publicar/Assinar` (`Publish/Subscribe`) paralelamente á estrutura de dados (particularmente as Listas)
 
-Tipos de `estruturas de dados` que o Redis oferece:
+## Tipos de `estruturas de dados` que o Redis oferece:
 
-1. String
+### String
 
 Sequencia de caracteres. É a estrutura de dados mais `simples` do Redis.
 
 Operações atômicas.
 
 
-2. Hash 
+### Hash 
 
 Conhecido como Mapa, Dicionário ou vetor associativo.
 
@@ -38,7 +38,7 @@ Basicamente é uma coleção de `campo/valor`
 Exemplo de Uso: Session, Perfil de Usuário, Documentos JSON
 
 
-3. List
+### List
 
 Lista Ordenada de Strings com índices numérico.
 
@@ -47,7 +47,7 @@ Tempo: O(1) para adicionar ou remover itens mesmo com milhões de items
 Exemplo de Uso: Filas. Facilita a implementação do padrão `assíncrono` `produtor-consumidor`.
 
 
-4. Set (Grupo)
+### Set (Grupo)
 
 Grupo desordenado de Strings únicas.
 Oferece comandos para `Diferença`, `Interseção` e `União`
@@ -57,7 +57,7 @@ Exemplo de Uso: `Interesses` de um consumidor, `Grupo de Amigos` de um usuário.
 
 
 
-5. Sorted Set with range queries
+### Sorted Set with range queries
 
 Grupo ordenado por `classificação` de Strings únicas. Ao armazenar um valor, é associado a sua pontuaçào que é um valor.
 
@@ -68,7 +68,7 @@ Bom para buscar dados ordenados via classificação numérica e de forma simples
 Exemplo de Uso: Coleção de dados do tipo `série temporal`, lances de um leilão, compras X valor de compra, itens mais visualizados, quadro de classificação de um game.
 
 
-6. Geospatial index
+### Geospatial index
 
 É uma `forma especial` da implementação de `Grupo Ordenado`, onde a classificação númerica do item é uma coordenada geográfica.
 
@@ -76,19 +76,19 @@ Muito rápido para implementação de buscas dentro de uma área específica.
 
 
 
-7. Bitfield - Bitmap
+### Bitfield - Bitmap
 
 `Vetores` de `Bit` são usados para `contar` informações, mas limitando o consumo de memória.
 
 Ideal para casos onde é necessário lidar com grande volume de dados e consumir memória de forma eficiente.
 
 
-8. HyperLogLog
+### HyperLogLog
 
 É uma estrutura de dados usada para estimar/contar itens únicos. Foco em eficiência de memória e processamento.
 
 
-10. Stream
+### Stream
 
 Fluxo
 
