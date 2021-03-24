@@ -1,5 +1,6 @@
 <img align="center" src="https://i.imgur.com/cJjTcYk.png" />
 
+🇧🇷  🇵🇹 
 
 # Redis em 5 minutos
 
