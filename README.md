@@ -4,27 +4,27 @@
 
 # Index:
 
-- **O que é o Redis?**
-- **Tipos de dados**
-  1. `Sequência de caracteres`
-  2. `Mapa / Dicionário`
-  3. `Lista`
-  4. `Grupo`
-  5. `Grupo Ordenado`
-  6. `Index Geo Espacial`
-  7. `Mapa de bits`
-  8. `HyperLogLog`
-  9. `Streams`
-- **Manipulando dados**
-  1. `Sequência de caracteres`
-  2. `Mapa / Dicionário`
-  3. `Lista`
-  4. `Grupo`
-  5. `Grupo Ordenado`
-  6. `Index Geo Espacial`
-  7. `Mapa de bits`
-  8. `HyperLogLog`
-  9. `Streams`
+- [**O que é o Redis?**]()
+- [**Tipos de dados**]()
+  1. [`Sequência de caracteres`]()
+  2. [`Mapa / Dicionário`]()
+  3. [`Lista`]()
+  4. [`Grupo`]()
+  5. [`Grupo Ordenado`]()
+  6. [`Index Geo Espacial`]()
+  7. [`Mapa de bits`]()
+  8. [`HyperLogLog`]()
+  9. [`Streams`]()
+- [**Manipulando dados**]()
+  1. [`Sequência de caracteres`]()
+  2. [`Mapa / Dicionário`]()
+  3. [`Lista`]()
+  4. [`Grupo`]()
+  5. [`Grupo Ordenado`]()
+  6. [`Index Geo Espacial`]()
+  7. [`Mapa de bits`]()
+  8. [`HyperLogLog`]()
+  9. [`Streams`]()
 
 ## O que é o Redis?
 
