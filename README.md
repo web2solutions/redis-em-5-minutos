@@ -433,81 +433,319 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 
 ## Manipulando Sets.
 
+```bash
+  # 
+    > SADD key member [member ...]     # add the given value to the set
+  
+  # Tempo: O(1)
+```
 
-SADD key member [member ...]     # add the given value to the set
-SCARD key                        # get the number of members in a set
-SREM key member [member ...]     # remove the given value from the set
-SISMEMBER myset value            # test if the given value is in the set.
-SMEMBERS myset                   # return a list of all the members of this set
-SUNION key [key ...]             # combine two or more sets and returns the list of all elements
-SINTER key [key ...]             # intersect multiple sets
-SMOVE source destination member  # move a member from one set to another
-SPOP key [count]                 # remove and return one or multiple random members from a set
+```bash
+  # 
+    > SCARD key                        # get the number of members in a set
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SREM key member [member ...]     # remove the given value from the set
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SISMEMBER myset value            # test if the given value is in the set.
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SMEMBERS myset                   # return a list of all the members of this set
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SUNION key [key ...]             # combine two or more sets and returns the list of all elements
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SINTER key [key ...]             # intersect multiple sets
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SMOVE source destination member  # move a member from one set to another
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SPOP key [count]                 # remove and return one or multiple random members from a set
+  
+  # Tempo: O(1)
+```
 
 --------------------------
 
 ## Manipulando Sorted Sets
 
+```bash
+  # add one or more members to a sorted set, or update its score if it already exists
+    > ZADD key [NX|XX] [CH] [INCR] score member [score member ...]  
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZCARD key                           # get the number of members in a sorted set
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZCOUNT key min max                  # count the members in a sorted set with scores within the given values
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZINCRBY key increment member        # increment the score of a member in a sorted set
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZRANGE key start stop [WITHSCORES]  # returns a subset of the sorted set
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZRANK key member                    # determine the index of a member in a sorted set
+  
+  # Tempo: O(1)
+```
+```bash
+  # 
+    > ZREM key member [member ...]        # remove one or more members from a sorted set
+  
+  # Tempo: O(1)
+```
 
-ZADD key [NX|XX] [CH] [INCR] score member [score member ...]  # add one or more members to a sorted set, or update its score if it already exists
+```bash
+  # 
+    > ZREMRANGEBYRANK key start stop      # remove all members in a sorted set within the given indexes
+  
+  # Tempo: O(1)
+```
 
-ZCARD key                           # get the number of members in a sorted set
-ZCOUNT key min max                  # count the members in a sorted set with scores within the given values
-ZINCRBY key increment member        # increment the score of a member in a sorted set
-ZRANGE key start stop [WITHSCORES]  # returns a subset of the sorted set
-ZRANK key member                    # determine the index of a member in a sorted set
-ZREM key member [member ...]        # remove one or more members from a sorted set
-ZREMRANGEBYRANK key start stop      # remove all members in a sorted set within the given indexes
-ZREMRANGEBYSCORE key min max        # remove all members in a sorted set, by index, with scores ordered from high to low
-ZSCORE key member                   # get the score associated with the given mmeber in a sorted set
+```bash
+  # 
+    > ZREMRANGEBYSCORE key min max        # remove all members in a sorted set, by index, with scores ordered from high to low
+  
+  # Tempo: O(1)
+```
 
-ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of members in a sorted set, by score
+```bash
+  # 
+    > ZSCORE key member                   # get the score associated with the given mmeber in a sorted set
+  
+  # Tempo: O(1)
+```
 
+```bash
+  # 
+    > ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of members in a sorted set, by score
+  
+  # Tempo: O(1)
+```
 --------------------------
 
 
 ## Manipulando Hashes
 
 
+```bash
+  # 
+    > HGET key field          # get the value of a hash field
+  
+  # Tempo: O(1)
+```
 
-HGET key field          # get the value of a hash field
-HGETALL key             # get all the fields and values in a hash
+
+```bash
+  # 
+    > HGETALL key             # get all the fields and values in a hash
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
 HSET key field value    # set the string value of a hash field
-HSETNX key field value  # set the string value of a hash field, only if the field does not exists
+  
+  # Tempo: O(1)
+```
 
-HMSET key field value [field value ...]  # set multiple fields at once
 
-HINCRBY key field increment  # increment value in hash by X
-HDEL key field [field ...]   # delete one or more hash fields
-HEXISTS key field            # determine if a hash field exists
-HKEYS key                    # get all the fields in a hash
-HLEN key                     # get all the fields in a hash
-HSTRLEN key field            # get the length of the value of a hash field
-HVALS key                    # get all the values in a hash
+```bash
+  # 
+    > HSETNX key field value  # set the string value of a hash field, only if the field does not exists
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HMSET key field value [field value ...]  # set multiple fields at once
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HINCRBY key field increment  # increment value in hash by X
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HDEL key field [field ...]   # delete one or more hash fields
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HEXISTS key field            # determine if a hash field exists
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HKEYS key                    # get all the fields in a hash
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HLEN key                     # get all the fields in a hash
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HSTRLEN key field            # get the length of the value of a hash field
+  
+  # Tempo: O(1)
+```
+
+
+```bash
+  # 
+    > HVALS key                    # get all the values in a hash
+  
+  # Tempo: O(1)
+```
+
 
 
 --------------------------
 
 ## Manipulando HyperLogLog
 
+```bash
+  # 
+    > PFADD key element [element ...]  # add the specified elements to the specified HyperLogLog
+  
+  # Tempo: O(1)
+```
 
-PFADD key element [element ...]  # add the specified elements to the specified HyperLogLog
-PFCOUNT key [key ...]            # return the approximated cardinality of the set(s) observed by the HyperLogLog at key's)
+```bash
+  # 
+    > PFCOUNT key [key ...]            # return the approximated cardinality of the set(s) observed by the HyperLogLog at key's)
+  
+  # Tempo: O(1)
+```
 
-PFMERGE destkey sourcekey [sourcekey ...]  # merge N HyperLogLogs into a single one
+```bash
+  # 
+    > PFMERGE destkey sourcekey [sourcekey ...]  # merge N HyperLogLogs into a single one
+  
+  # Tempo: O(1)
+```
+
 
 
 --------------------------
 
 ## Manipulando Publicação / Assinatura
 
+```bash
+  # 
+    > PSUBSCRIBE pattern [pattern ...]             # listen for messages published to channels matching the given patterns
+  
+  # Tempo: O(1)
+```
 
-PSUBSCRIBE pattern [pattern ...]             # listen for messages published to channels matching the given patterns
-PUBSUB subcommand [argument [argument ...]]  # inspect the state of the Pub/Sub subsystem
-PUBLISH channel message                      # post a message to a channel
-PUNSUBSCRIBE [pattern [pattern ...]]         # stop listening for messages posted to channels matching the given patterns
-SUBSCRIBE channel [channel ...]              # listen for messages published to the given channels
-UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages posted to the given channels
+```bash
+  # 
+    > PUBSUB subcommand [argument [argument ...]]  # inspect the state of the Pub/Sub subsystem
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > PUBLISH channel message                      # post a message to a channel
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > PUNSUBSCRIBE [pattern [pattern ...]]         # stop listening for messages posted to channels matching the given patterns
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > SUBSCRIBE channel [channel ...]              # listen for messages published to the given channels
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # 
+    > UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages posted to the given channels
+  
+  # Tempo: O(1)
+```
+
 
 --------------------------
 
