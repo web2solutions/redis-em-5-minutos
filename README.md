@@ -136,6 +136,13 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```
 
 ```bash
+  # cria uma chave com um valor associado SE a chave não existir
+  SETNX chave valor
+  
+  # Tempo: O(1)
+```
+
+```bash
   # recupera o valor de uma chave
   GET chave
   
@@ -226,12 +233,7 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
   # Tempo: 
 ```
 
-```bash
-  # cria uma chave com um valor associado SE a chave não existir
-  SETNX chave valor
-  
-  # Tempo: O(1)
-```
+
 
 ```bash
   # recupera o comprimento de um valor associado á chave dada.
