@@ -2,7 +2,7 @@
 
 # Redis em 5 minutos
 
-## Index
+## Índice de navegação:
 
 - [**O que é o Redis?**](#oquee)
 - [**Tipos de dados**](#tipos)
