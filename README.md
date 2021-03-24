@@ -28,7 +28,7 @@
 
 ## <a name="oquee"></a> O que é o Redis?
 
-O redis é um `armazenador ->em memória<- de estrutura de dados`, que utiliza o mecanismo do tipo `chave/valor` (`key/value`) para acesso á dados. Isto significa que para armazenar qualquer `valor`, uma `chave de acesso` é atribuída á aquele valor. Para se acessar um `valor` é necessário conhecer sua `chave`.
+O redis é um `armazenador` **em memória** `de estrutura de dados`, que utiliza o mecanismo do tipo `chave/valor` (`key/value`) para acesso á dados. Isto significa que para armazenar qualquer `valor`, uma `chave de acesso` é atribuída á aquele valor. Para se acessar um `valor` é necessário conhecer sua `chave`.
 
 O termo: `estrutura de dados` refere-se ao fato dos `valores` das `chaves` armazenadas poderem conter `estrutura de dados complexas`.
 
