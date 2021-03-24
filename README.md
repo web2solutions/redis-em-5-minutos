@@ -1,4 +1,4 @@
-<img align="center" src="https://i.imgur.com/KCwv46t.png" width="200" />
+<img align="center" src="https://i.imgur.com/cJjTcYk.png" />
 
 
 # Redis em 5 minutos
@@ -130,54 +130,85 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 **Mais comuns**
 
 ```bash
+  # cria uma chave com um valor associado
   SET chave valor
 ```
 
 ```bash
+  # recupera o valor de uma chave
   GET chave
 ```
 
 ```bash
+  # deleta uma chave
   DEL chave
 ```
 
 
 ```bash
+  # incrementa em mais 1 o valor de uma chave to tipo contador
   INCR chave
 ```
 
 ```bash
+  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número
   INCRBY chave numero
 ```
 
 ```bash
+  # Decrementa em menos 1 o valor de uma chave to tipo contador
   DECR chave
 ```
 
 ```bash
+  # incrementa em menos X o valor de uma chave to tipo contador, onde X é um número
   DECRBY chave numero
 ```
 
 
 ```bash
+  # Configura uma chave pra expirar em X segundos, onde X é  um número
   EXPIRE chave segundos
 ```
 
 ```bash
+  # Recupera o tempo de vida de uma  chave
   TTL chave
 ```
 
-APPEND key value                  # append a value to a key
-BITCOUNT key [start end]          # count set bits in a string
-SETNX key value                   # set if not exist value in key
+```bash
+  # Adiciona um valor ao final do valor de uma chave
+  APPEND chave value
+```
+
+```bash
+  # cria uma chave com um valor associado SE NÃO existir valor associado á chave
+  SETNX chave valor
+```
+
+```bash
+  # recupera o comprimento de um valor associado á chave dada.
+  STRLEN chave
+```
+
+```bash
+  # cria múltiplas chaves com um valor associado
+  MSET chave1 valor1 chave2 valor2
+```
+
+```bash
+  # cria múltiplas chaves com um valor associado, somente se nenhuma das chaves existirem
+  MSETNX chave1 valor1 chave2 valor2
+```
+
+
 SETRANGE key offset value         # overwrite part of a string at key starting at the specified offset
-STRLEN key                        # get the length of the value stored in a key
-MSET key value [key value ...]    # set multiple keys to multiple values
+
 MSETNX key value [key value ...]  # set multiple keys to multiple values, only if none of the keys exist
 GETRANGE key value                # get a substring value of a key and return its old value
 MGET key [key ...]                # get the values of all the given keys
 INCRBYFLOAT key increment         # increment the float value of a key by the given amount
-
+BITCOUNT key [start end]          # count set bits in a string
 
 EXPIRE key 120                    # key will be deleted in 120 seconds
 TTL key                           # returns the number of seconds until a key is deleted
