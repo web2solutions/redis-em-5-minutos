@@ -28,6 +28,9 @@ Conteúdo em português com o objetivo de ensinar a entender e usar o Redis de f
   8. [`HyperLogLog`](#mhyper)
   9. [`Streams`](#mstream)
 
+
+--------------------------
+
 ## <a name="oquee"></a> O que é o Redis?
 
 > Cache? Banco de Dados? Mediador de Mensagens?
@@ -45,6 +48,8 @@ Além disso, Redis pode ser usado como `banco de dados` e `Corretor/Mediador de 
 Cenários onde o Redis armazena dados que não são armazenados em nenhum outro lugar, fazem do Redis um banco de dados.
 
 Como `Mediador de Mensagens`, o Redis implementa o padrão `Publicar/Assinar` (`Publish/Subscribe`) paralelamente á estrutura de dados (particularmente as Listas)
+
+--------------------------
 
 ## <a name="tipos"></a> Tipos de `estruturas de dados` que o Redis oferece:
 
@@ -135,7 +140,7 @@ Não é muito diferente de uma `Lista`, exceto pelo fato de possuir uma API `blo
 Os fluxos do Redis oferecem suporte a consultas de intervalo por ID. 
 
 
-
+--------------------------
 
 ## Comandos
 
@@ -150,7 +155,7 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```bash
   redis-cli
 ```
-
+--------------------------
 
 ## Manipulando Strings.
 
@@ -300,7 +305,7 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```
 
 
-
+--------------------------
 
 ## Manipulando Lists.
 
@@ -404,6 +409,7 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
   # Tempo: 
 ```
 
+--------------------------
 
 ## Manipulando Sets.
 
@@ -418,6 +424,7 @@ SINTER key [key ...]             # intersect multiple sets
 SMOVE source destination member  # move a member from one set to another
 SPOP key [count]                 # remove and return one or multiple random members from a set
 
+--------------------------
 
 ## Manipulando Sorted Sets
 
@@ -435,6 +442,8 @@ ZREMRANGEBYSCORE key min max        # remove all members in a sorted set, by ind
 ZSCORE key member                   # get the score associated with the given mmeber in a sorted set
 
 ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of members in a sorted set, by score
+
+--------------------------
 
 
 ## Manipulando Hashes
@@ -457,6 +466,8 @@ HSTRLEN key field            # get the length of the value of a hash field
 HVALS key                    # get all the values in a hash
 
 
+--------------------------
+
 ## Manipulando HyperLogLog
 
 
@@ -465,6 +476,8 @@ PFCOUNT key [key ...]            # return the approximated cardinality of the se
 
 PFMERGE destkey sourcekey [sourcekey ...]  # merge N HyperLogLogs into a single one
 
+
+--------------------------
 
 ## Manipulando Publicação / Assinatura
 
@@ -475,6 +488,8 @@ PUBLISH channel message                      # post a message to a channel
 PUNSUBSCRIBE [pattern [pattern ...]]         # stop listening for messages posted to channels matching the given patterns
 SUBSCRIBE channel [channel ...]              # listen for messages published to the given channels
 UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages posted to the given channels
+
+--------------------------
 
 
 ## Manipulando Streams
@@ -490,6 +505,9 @@ UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages poste
   > XLEN meustream 
   # (integer) 1
 ```
+
+--------------------------
+
 
 ## Outros comandos
 
