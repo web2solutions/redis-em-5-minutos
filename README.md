@@ -293,7 +293,7 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 
 ## Manipulando Lists.
 
-Conceito básico, numa lista, o primeiro item que entra, é o primeiro que sai (FIFO)
+Conceito básico, numa lista, o primeiro item que entra, é o primeiro que sai (FIFO - `First in, First out`)
 
 ```bash
   # adiciona um ou mais itens na `saida` da lista fila_atendimento
