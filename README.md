@@ -305,7 +305,8 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```
 
 ```bash
-  # adiciona um ou mais itens no `começo` da lista, SOMENTE SE a chave já existir E armazenar uma lista
+  # adiciona um ou mais itens no `começo` da lista, SOMENTE SE a chave já existir E 
+  # armazenar uma lista
   > RPUSHX fila_atendimento 'Pedro Cabral'           
   # 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis' 'Pedro Cabral'
   # Tempo: O(1) para cada elemento
@@ -329,7 +330,8 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```bash
   # recupera sublista compreendida entre o dada a posição do index inicial e final.
   # Caso forneça -1 como último valor, a busca compreenderá até o último item da lista
-  # Caso forneça -2 como último valor, a busca compreenderá até o penúltimo item da lista e assim sucessivamente
+  # Caso forneça -2 como último valor, a busca compreenderá até o penúltimo item
+  # da lista e assim sucessivamente
   > LRANGE fila_atendimento 0 -1
   # "Joe Biden" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
 
@@ -352,7 +354,9 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
   > LINSERT fila_atendimento AFTER 'Jose Eduardo' 'Maria Padilha'
   "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
 
-  # Tempo: O(1) {se adicionar na saida da lista}  e O(n) {se adicionar na entrada da lista}
+  # Tempo: 
+  # O(1) {se adicionar na saida da lista}  
+  # O(n) {se adicionar na entrada da lista}
 ```
 
 ```bash
@@ -393,7 +397,8 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```
 
 ```bash
-  # atomicamente remove o ultimo elemento em uma lista (PRIMEIRO da fila), e adiciona no inicio de uma outra lista (ÚLTIMO da fila)
+  # atomicamente remove o ultimo elemento em uma lista (PRIMEIRO da fila), e adiciona no 
+  # inicio de uma outra lista (ÚLTIMO da fila)
   > RPOPLPUSH fila_atendimento fila_atendimento_prioritario         
   
   # Tempo: O(1)
