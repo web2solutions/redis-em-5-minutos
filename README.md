@@ -2,7 +2,7 @@
 
 # Redis em 5 minutos
 
-Conteúdo em português com o objetivo de ensinar a entender e usar o Redis de forma simples, objetiva e `quase` completa.
+Conteúdo em português com o objetivo de mitigar o uso do Redis de forma simples, objetiva e `quase` completa.
 
 ## Índice de navegação:
 
