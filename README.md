@@ -227,10 +227,10 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```
 
 ```bash
-  # cria uma chave com um valor associado SE NÃO existir valor associado á chave
+  # cria uma chave com um valor associado SE a chave não existir
   SETNX chave valor
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
@@ -244,14 +244,14 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
   # cria múltiplas chaves com um valor associado
   MSET chave1 valor1 chave2 valor2
   
-  # Tempo: 
+  # Tempo: O(1) para setar cada chave
 ```
 
 ```bash
   # cria múltiplas chaves com um valor associado, somente se nenhuma das chaves existirem
   MSETNX chave1 valor1 chave2 valor2
   
-  # Tempo: 
+  # Tempo: O(1) para setar cada chave
 ```
 
 ```bash
