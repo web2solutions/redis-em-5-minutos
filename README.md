@@ -4,29 +4,29 @@
 
 # Index:
 
-- [**O que é o Redis?**]()
-- [**Tipos de dados**]()
-  1. [`Sequência de caracteres`]()
-  2. [`Mapa / Dicionário`]()
-  3. [`Lista`]()
-  4. [`Grupo`]()
-  5. [`Grupo Ordenado`]()
-  6. [`Index Geo Espacial`]()
-  7. [`Mapa de bits`]()
-  8. [`HyperLogLog`]()
-  9. [`Streams`]()
+- [**O que é o Redis?**](#oquee)
+- [**Tipos de dados**](#tipos)
+  1. [`Sequência de caracteres`](#string)
+  2. [`Mapa / Dicionário`](#hash)
+  3. [`Lista`](#list)
+  4. [`Grupo`](#set)
+  5. [`Grupo Ordenado`](#sortedset)
+  6. [`Index Geo Espacial`](#geo)
+  7. [`Mapa de bits`](#bitmap)
+  8. [`HyperLogLog`](#hyper)
+  9. [`Streams`](#stream)
 - [**Manipulando dados**]()
-  1. [`Sequência de caracteres`]()
-  2. [`Mapa / Dicionário`]()
-  3. [`Lista`]()
-  4. [`Grupo`]()
-  5. [`Grupo Ordenado`]()
-  6. [`Index Geo Espacial`]()
-  7. [`Mapa de bits`]()
-  8. [`HyperLogLog`]()
-  9. [`Streams`]()
+  1. [`Sequência de caracteres`](#mstring)
+  2. [`Mapa / Dicionário`](#mhash)
+  3. [`Lista`](#mlist)
+  4. [`Grupo`](#mset)
+  5. [`Grupo Ordenado`](#msortedset)
+  6. [`Index Geo Espacial`](#mgeo)
+  7. [`Mapa de bits`](#mbitmap)
+  8. [`HyperLogLog`](#mhyper)
+  9. [`Streams`](#mstream)
 
-## O que é o Redis?
+## <a name="oquee"></a> O que é o Redis?
 
 O redis é um `armazenador ->em memória<- de estrutura de dados`, que utiliza o mecanismo do tipo `chave/valor` (`key/value`) para acesso á dados. Isto significa que para armazenar qualquer `valor`, uma `chave de acesso` é atribuída á aquele valor. Para se acessar um `valor` é necessário conhecer sua `chave`.
 
@@ -42,16 +42,16 @@ Cenários onde o Redis armazena dados que não são armazenados em nenhum outro 
 
 Como `Mediador de Mensagens`, o Redis implementa o padrão `Publicar/Assinar` (`Publish/Subscribe`) paralelamente á estrutura de dados (particularmente as Listas)
 
-## Tipos de `estruturas de dados` que o Redis oferece:
+## <a name="tipos"></a> Tipos de `estruturas de dados` que o Redis oferece:
 
-### String
+### <a name="string"></a> String
 
 Sequencia de caracteres. É a estrutura de dados mais `simples` do Redis.
 
 Operações atômicas.
 
 
-### Hash 
+### <a name="hash"></a> Hash 
 
 Conhecido como Mapa, Dicionário ou vetor associativo.
 
@@ -64,7 +64,7 @@ Basicamente é uma coleção de `campo/valor`
 Exemplo de Uso: Session, Perfil de Usuário, Documentos JSON
 
 
-### List
+### <a name="list"></a> List
 
 Lista Ordenada de Strings com índices numérico.
 
@@ -73,7 +73,7 @@ Tempo: O(1) para adicionar ou remover itens mesmo com milhões de items
 Exemplo de Uso: Filas. Facilita a implementação do padrão `assíncrono` `produtor-consumidor`.
 
 
-### Set (Grupo)
+### <a name="set"></a> Set (Grupo)
 
 Grupo desordenado de Strings únicas.
 Oferece comandos para `Diferença`, `Interseção` e `União`
@@ -83,7 +83,7 @@ Exemplo de Uso: `Interesses` de um consumidor, `Grupo de Amigos` de um usuário.
 
 
 
-### Sorted Set with range queries
+### <a name="sortedset"></a> Sorted Set with range queries
 
 Grupo ordenado por `classificação` de Strings únicas. Ao armazenar um valor, é associado a sua pontuaçào que é um valor.
 
@@ -94,7 +94,7 @@ Bom para buscar dados ordenados via classificação numérica e de forma simples
 Exemplo de Uso: Coleção de dados do tipo `série temporal`, lances de um leilão, compras X valor de compra, itens mais visualizados, quadro de classificação de um game.
 
 
-### Geospatial index
+### <a name="geo"></a> Geospatial index
 
 É uma `forma especial` da implementação de `Grupo Ordenado`, onde a classificação númerica do item é uma coordenada geográfica.
 
@@ -102,19 +102,19 @@ Muito rápido para implementação de buscas dentro de uma área específica.
 
 
 
-### Bitfield - Bitmap
+### <a name="bitmap"></a> Bitfield - Bitmap
 
 `Vetores` de `Bit` são usados para `contar` informações, mas limitando o consumo de memória.
 
 Ideal para casos onde é necessário lidar com grande volume de dados e consumir memória de forma eficiente.
 
 
-### HyperLogLog
+### <a name="hyper"></a> HyperLogLog
 
 É uma estrutura de dados usada para estimar/contar itens únicos. Foco em eficiência de memória e processamento.
 
 
-### Stream
+### <a name="stream"></a> Stream
 
 Fluxo
 
