@@ -129,35 +129,35 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 
 ```bash
   # cria uma chave com um valor associado
-  SET chave valor
+  > SET chave valor
   
   # Tempo: O(1)
 ```
 
 ```bash
   # cria uma chave com um valor associado SE a chave não existir
-  SETNX chave valor
+  > SETNX chave valor
   
   # Tempo: O(1)
 ```
 
 ```bash
   # recupera o valor de uma chave
-  GET chave
+  > GET chave
   
   # Tempo: O(1)
 ```
 
 ```bash
   # associa um novo valor á chave especificada e retorna o valor antigo da chave
-  GETSET chave valor
+  > GETSET chave valor
 
   # Tempo: O(1)
 ```
 
 ```bash
   # deleta todas as chaves dadas
-  DEL chave1 chave2
+  > DEL chave1 chave2
   
   # Tempo: O(1)
 ```
@@ -165,35 +165,35 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 
 ```bash
   # incrementa em mais 1 o valor de uma chave to tipo contador
-  INCR chave
+  > INCR chave
   
   # Tempo: O(1)
 ```
 
 ```bash
   # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número inteiro
-  INCRBY chave numero
+  > INCRBY chave numero
   
   # Tempo: O(1)
 ```
 
 ```bash
   # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número float
-  INCRBYFLOAT chave numero
+  > INCRBYFLOAT chave numero
   
   # Tempo: 
 ```
 
 ```bash
   # Decrementa em menos 1 o valor de uma chave to tipo contador
-  DECR chave
+  > DECR chave
 
   # Tempo: O(1)
 ```
 
 ```bash
   # incrementa em menos X o valor de uma chave to tipo contador, onde X é um número
-  DECRBY chave numero
+  > DECRBY chave numero
 
   # Tempo: O(1)
 ```
@@ -201,21 +201,21 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 
 ```bash
   # Configura uma chave pra expirar em X segundos, onde X é  um número
-  EXPIRE chave segundos
+  > EXPIRE chave segundos
   
   # Tempo: O(1)
 ```
 
 ```bash
   # Recupera o tempo de vida de uma  chave
-  TTL chave
+  > TTL chave
   
   # Tempo: O(1)
 ```
 
 ```bash
   # Adiciona um valor ao final do valor de uma chave
-  APPEND chave value
+  > APPEND chave value
   
   # Tempo: 
 ```
@@ -224,39 +224,53 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 
 ```bash
   # recupera o comprimento de um valor associado á chave dada.
-  STRLEN chave
+  > STRLEN chave
   
   # Tempo: 
 ```
 
 ```bash
   # cria múltiplas chaves com um valor associado
-  MSET chave1 valor1 chave2 valor2
+  > MSET chave1 valor1 chave2 valor2
   
   # Tempo: O(1) para setar cada chave
 ```
 
 ```bash
   # cria múltiplas chaves com um valor associado, somente se nenhuma das chaves existirem
-  MSETNX chave1 valor1 chave2 valor2
+  > MSETNX chave1 valor1 chave2 valor2
   
   # Tempo: O(1) para setar cada chave
 ```
 
 ```bash
   # recupera o valor de múltiplas chaves
-  MGET chave1 chave2
+  > MGET chave1 chave2
   
   # Tempo: 
 ```
 
+```bash
+  # overwrite part of a string at key starting at the specified offset
+  > SETRANGE key offset value         
+  
+  # Tempo: 
+```
 
+```bash
+  # get a substring value of a key and return its old value
+  > GETRANGE key value                
+  
+  # Tempo: 
+```
 
-SETRANGE key offset value         # overwrite part of a string at key starting at the specified offset
-GETRANGE key value                # get a substring value of a key and return its old value
+```bash
+  # count set bits in a string
+  > BITCOUNT key [start end]          
+  
+  # Tempo: 
+```
 
-
-BITCOUNT key [start end]          # count set bits in a string
 
 
 
@@ -265,59 +279,101 @@ BITCOUNT key [start end]          # count set bits in a string
 
 
 ```bash
-  RPUSH key value [value ...]           # put the new value at the end of the list
+  # put the new value at the end of the list
+  > RPUSH key value [value ...]           
+  
+  # Tempo: 
 ```
 
 ```bash
-  RPUSHX key value                      # append a value to a list, only if the exists
+  # append a value to a list, only if the exists
+  > RPUSHX key value                      
+  
+  # Tempo: 
 ```
 
 ```bash
-  LPUSH key value [value ...]           # put the new value at the start of the list
+  # put the new value at the start of the list
+  > LPUSH key value [value ...]           
+  
+  # Tempo: 
 ```
 
 ```bash
-  LRANGE key start stop                 # give a subset of the list
+  # give a subset of the list
+  > LRANGE key start stop                 
+  
+  # Tempo: 
 ```
 
 ```bash
-  LINDEX key index                      # get an element from a list by its index
+  # get an element from a list by its index
+  > LINDEX key index                      
+  
+  # Tempo: 
 ```
 
 ```bash
-  LINSERT key BEFORE|AFTER pivot value  # insert an element before or after another element in a list
+  # insert an element before or after another element in a list
+  > LINSERT key BEFORE|AFTER pivot value  
+  
+  # Tempo: 
 ```
 
 ```bash
-  LLEN key                              # return the current length of the list
+  # return the current length of the list
+  > LLEN key                              
+  
+  # Tempo: 
 ```
 
 ```bash
-  LPOP key                              # remove the first element from the list and returns it
+  # remove the first element from the list and returns it
+  > LPOP key                              
+  
+  # Tempo: 
 ```
 
 ```bash
-  LSET key index value                  # set the value of an element in a list by its index
+  # set the value of an element in a list by its index
+  > LSET key index value                  
+  
+  # Tempo: 
 ```
 
 ```bash
-  LTRIM key start stop                  # trim a list to the specified range
+  # trim a list to the specified range
+  > LTRIM key start stop                  
+  
+  # Tempo: 
 ```
 
 ```bash
-  RPOP key                              # remove the last element from the list and returns it
+  # remove the last element from the list and returns it
+  > RPOP key                              
+  
+  # Tempo: 
 ```
 
 ```bash
-  RPOPLPUSH source destination          # remove the last element in a list, prepend it to another list and return it
+  # remove the last element in a list, prepend it to another list and return it
+  > RPOPLPUSH source destination          
+  
+  # Tempo: 
 ```
 
 ```bash
-  BLPOP key [key ...] timeout           # remove and get the first element in a list, or block until one is available
+  # remove and get the first element in a list, or block until one is available
+  > BLPOP key [key ...] timeout           
+  
+  # Tempo: 
 ```
 
 ```bash
-  BRPOP key [key ...] timeout           # remove and get the last element in a list, or block until one is available
+  # remove and get the last element in a list, or block until one is available
+  > BRPOP key [key ...] timeout           
+  
+  # Tempo: 
 ```
 
 
