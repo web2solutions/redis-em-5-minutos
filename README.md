@@ -46,7 +46,7 @@ Como `Mediador de Mensagens`, o Redis implementa o padrão `Publicar/Assinar` (`
 
 ### <a name="string"></a> String
 
-Sequencia de caracteres. É a estrutura de dados mais `simples` do Redis.
+Sequência de caracteres. É a estrutura de dados mais `simples` do Redis.
 
 Operações atômicas.
 
