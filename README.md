@@ -125,93 +125,150 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```
 
 
-# Strings.
+# Manipulando Strings.
 
-**Mais comuns**
 
 ```bash
   # cria uma chave com um valor associado
   SET chave valor
+  
+  # Tempo: O(1)
 ```
 
 ```bash
   # recupera o valor de uma chave
   GET chave
+  
+  # Tempo: O(1)
 ```
 
 ```bash
-  # deleta uma chave
-  DEL chave
+  # associa um novo valor á chave especificada e retorna o valor antigo da chave
+  GETSET chave valor
+
+  # Tempo: O(1)
+```
+
+```bash
+  # RECUPERA todas as chaves dado o padrão glob fornecido.
+  KEYS glob
+  
+  # Exemplos:
+  # h?llo retornará hello hallo hhllo
+  # h*llo retornará hllo heeeello
+  # h[ae]llo retornará hello e hallo, mas não hillo
+
+  # Tempo: O(n)
+```
+
+```bash
+  # deleta todas as chaves dadas
+  DEL chave1 chave2
+  
+  # Tempo: O(1)
 ```
 
 
 ```bash
   # incrementa em mais 1 o valor de uma chave to tipo contador
   INCR chave
+  
+  # Tempo: O(1)
 ```
 
 ```bash
-  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número
+  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número inteiro
   INCRBY chave numero
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número float
+  INCRBYFLOAT chave numero
+  
+  # Tempo: 
 ```
 
 ```bash
   # Decrementa em menos 1 o valor de uma chave to tipo contador
   DECR chave
+
+  # Tempo: O(1)
 ```
 
 ```bash
   # incrementa em menos X o valor de uma chave to tipo contador, onde X é um número
   DECRBY chave numero
+
+  # Tempo: O(1)
 ```
 
 
 ```bash
   # Configura uma chave pra expirar em X segundos, onde X é  um número
   EXPIRE chave segundos
+  
+  # Tempo: O(1)
 ```
 
 ```bash
   # Recupera o tempo de vida de uma  chave
   TTL chave
+  
+  # Tempo: O(1)
 ```
 
 ```bash
   # Adiciona um valor ao final do valor de uma chave
   APPEND chave value
+  
+  # Tempo: 
 ```
 
 ```bash
   # cria uma chave com um valor associado SE NÃO existir valor associado á chave
   SETNX chave valor
+  
+  # Tempo: 
 ```
 
 ```bash
   # recupera o comprimento de um valor associado á chave dada.
   STRLEN chave
+  
+  # Tempo: 
 ```
 
 ```bash
   # cria múltiplas chaves com um valor associado
   MSET chave1 valor1 chave2 valor2
+  
+  # Tempo: 
 ```
 
 ```bash
   # cria múltiplas chaves com um valor associado, somente se nenhuma das chaves existirem
   MSETNX chave1 valor1 chave2 valor2
+  
+  # Tempo: 
+```
+
+```bash
+  # recupera o valor de múltiplas chaves
+  MGET chave1 chave2
+  
+  # Tempo: 
 ```
 
 
-SETRANGE key offset value         # overwrite part of a string at key starting at the specified offset
 
-MSETNX key value [key value ...]  # set multiple keys to multiple values, only if none of the keys exist
+SETRANGE key offset value         # overwrite part of a string at key starting at the specified offset
 GETRANGE key value                # get a substring value of a key and return its old value
-MGET key [key ...]                # get the values of all the given keys
-INCRBYFLOAT key increment         # increment the float value of a key by the given amount
+
+
 BITCOUNT key [start end]          # count set bits in a string
 
-EXPIRE key 120                    # key will be deleted in 120 seconds
-TTL key                           # returns the number of seconds until a key is deleted
 
 
 # Lists.
