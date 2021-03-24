@@ -125,7 +125,7 @@ Ideal para casos onde é necessário lidar com grande volume de dados e consumir
 
 ### <a name="stream"></a> Stream
 
-Fluxo
+Fluxo de dados
 
 Implementa uma estrutura de dados do tipo fluxo de log. Primariamente funciona no modo `acrescentar informações no final` somente.
 
@@ -137,7 +137,7 @@ Não é muito diferente de uma `Lista`, exceto pelo fato de possuir uma API `blo
 
 É composto por `um` ou mais `pares` de `campo-valor`
 
-Os fluxos do Redis oferecem suporte a consultas de intervalo por ID. 
+Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID. 
 
 
 --------------------------
@@ -185,64 +185,6 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
   # associa um novo valor á chave especificada e retorna o valor antigo da chave
   > GETSET chave valor
 
-  # Tempo: O(1)
-```
-
-```bash
-  # deleta todas as chaves dadas
-  > DEL chave1 chave2
-  
-  # Tempo: O(1)
-```
-
-
-```bash
-  # incrementa em mais 1 o valor de uma chave to tipo contador
-  > INCR chave
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número inteiro
-  > INCRBY chave numero
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número float
-  > INCRBYFLOAT chave numero
-  
-  # Tempo: 
-```
-
-```bash
-  # Decrementa em menos 1 o valor de uma chave to tipo contador
-  > DECR chave
-
-  # Tempo: O(1)
-```
-
-```bash
-  # incrementa em menos X o valor de uma chave to tipo contador, onde X é um número
-  > DECRBY chave numero
-
-  # Tempo: O(1)
-```
-
-
-```bash
-  # Configura uma chave pra expirar em X segundos, onde X é  um número
-  > EXPIRE chave segundos
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # Recupera o tempo de vida de uma  chave
-  > TTL chave
-  
   # Tempo: O(1)
 ```
 
@@ -306,6 +248,48 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 
 
 --------------------------
+
+## Manipulando Contadores.
+
+
+
+```bash
+  # incrementa em mais 1 o valor de uma chave to tipo contador
+  > INCR chave
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número inteiro
+  > INCRBY chave numero
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # incrementa em mais X o valor de uma chave to tipo contador, onde X é um número float
+  > INCRBYFLOAT chave numero
+  
+  # Tempo: 
+```
+
+```bash
+  # Decrementa em menos 1 o valor de uma chave to tipo contador
+  > DECR chave
+
+  # Tempo: O(1)
+```
+
+```bash
+  # incrementa em menos X o valor de uma chave to tipo contador, onde X é um número
+  > DECRBY chave numero
+
+  # Tempo: O(1)
+```
+
+--------------------------
+
 
 ## Manipulando Lists.
 
@@ -514,6 +498,12 @@ UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages poste
 ```bash
   # RECUPERA todas as chaves dado o padrão glob fornecido.
   KEYS glob
+
+  keys <padrão # use com cuidado em produção
+ 	keys prefixo*
+ 	keys *padrão*
+ 	keys *sufixo
+ 	keys [a-c]* # expressoes tipo grep
   
   # Exemplos:
   # h?llo retornará hello hallo hhllo
@@ -523,5 +513,46 @@ UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages poste
   # Tempo: O(n)
 ```
 
+```bash
+  # deleta todas as chaves dadas
+  > DEL chave1 chave2
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # Configura uma chave pra expirar em X segundos, onde X é  um número
+  > EXPIRE chave segundos
+  
+  # Tempo: O(1)
+```
 
 
+```bash
+  # Recupera o tempo de vida de uma  chave
+  > TTL chave
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # Checa a existência de uma chave dada
+  > EXISTS chave
+  
+  # Tempo: 
+```
+
+
+```bash
+  # Assiste os comandos ao vivo. Seja cuidadoso ao usar em produção.
+  > MONITOR
+  
+  # Tempo: 
+```
+
+```bash
+  # recupera informações sobre o Redis
+  > INFO
+  
+  # Tempo: 
+```
