@@ -2,7 +2,7 @@
 
 # Redis em 5 minutos
 
-Este conteúdo tem como objetivo ensinar Redis á desenvolvedores de língua portuguesa que não dominam principalmente a língua inglesa.
+Conteúdo em português com o objetivo de ensinar a entender e usar o Redis de forma simples, objetiva e `quase` completa.
 
 ## Índice de navegação:
 
