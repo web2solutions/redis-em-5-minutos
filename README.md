@@ -331,21 +331,25 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
   # Caso forneça -1 como último valor, a busca compreenderá até o último item da lista
   # Caso forneça -2 como último valor, a busca compreenderá até o penúltimo item da lista e assim sucessivamente
   > LRANGE fila_atendimento 0 -1
-  
+  # "Joe Biden" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+
   # Tempo: O(n)
 ```
 
 ```bash
-  # get an element from a list by its index
-  > LINDEX fila_atendimento index                      
-  
-  # Tempo: 
+  # recupera um elemento de uma lista dado a posição de seu index
+  > LINDEX fila_atendimento 1
+  # "Jose Eduardo"
+
+  # Tempo: O(n)
 ```
 
 ```bash
-  # insert an element before or after another element in a list
-  > LINSERT fila_atendimento BEFORE|AFTER pivot value  
-  
+  # adiciona um elemento antes ou depois de um elemento da lista
+  > LINSERT fila_atendimento BEFORE 'Jose Eduardo' 'Joana Dark'
+  "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+  > LINSERT fila_atendimento AFTER 'Jose Eduardo' 'Maria Padilha'
+  "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
   # Tempo: 
 ```
 
