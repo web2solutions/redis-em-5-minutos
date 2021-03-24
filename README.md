@@ -293,81 +293,93 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 
 ## Manipulando Lists.
 
-
+Conceito básico, numa lista, o primeiro item que entra, é o primeiro que sai (FIFO)
 
 ```bash
-  # put the new value at the end of the list
-  > RPUSH key value [value ...]           
+  # adiciona um ou mais itens na `saida` da lista fila_atendimento
+  > RPUSH fila_atendimento 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis'
   
-  # Tempo: 
+  # Os itens são indexados na mesma ordem dos valores dados.
+  # 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis'
+  # Tempo: O(1)
 ```
 
 ```bash
-  # append a value to a list, only if the exists
-  > RPUSHX key value                      
-  
-  # Tempo: 
+  # adiciona um ou mais itens na `saida` da lista, SOMENTE SE a chave já existir E armazenar uma lista
+  > RPUSHX fila_atendimento 'Pedro Cabral'           
+  # 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis' 'Pedro Cabral'
+  # Tempo: O(1)
 ```
 
 ```bash
-  # put the new value at the start of the list
-  > LPUSH key value [value ...]           
+  # adiciona um ou mais itens na `entrada` da lista
+  > LPUSH fila_atendimento 'Joe Biden'
   
-  # Tempo: 
+  # 'Joe Biden' 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis' 'Pedro Cabral'
+
+  # Os itens são indexados inversamente ordenado
+  
+  # Exemplo:
+  > LPUSH fila_atendimento2 'Jose Eduardo' 'Maria da Silva'
+  > LRANGE fila_atendimento2 0 1 # 'Maria da Silva' 'Jose Eduardo' 
+  
+  # Tempo: O(1)
 ```
 
 ```bash
-  # give a subset of the list
-  > LRANGE key start stop                 
+  # recupera sublista compreendida entre o dada a posição do index inicial e final.
+  # Caso forneça -1 como último valor, a busca compreenderá até o último item da lista
+  # Caso forneça -2 como último valor, a busca compreenderá até o penúltimo item da lista e assim sucessivamente
+  > LRANGE fila_atendimento 0 -1
   
-  # Tempo: 
+  # Tempo: O(n)
 ```
 
 ```bash
   # get an element from a list by its index
-  > LINDEX key index                      
+  > LINDEX fila_atendimento index                      
   
   # Tempo: 
 ```
 
 ```bash
   # insert an element before or after another element in a list
-  > LINSERT key BEFORE|AFTER pivot value  
+  > LINSERT fila_atendimento BEFORE|AFTER pivot value  
   
   # Tempo: 
 ```
 
 ```bash
   # return the current length of the list
-  > LLEN key                              
+  > LLEN fila_atendimento                            
   
   # Tempo: 
 ```
 
 ```bash
   # remove the first element from the list and returns it
-  > LPOP key                              
+  > LPOP fila_atendimento
   
   # Tempo: 
 ```
 
 ```bash
   # set the value of an element in a list by its index
-  > LSET key index value                  
+  > LSET fila_atendimento index value                  
   
   # Tempo: 
 ```
 
 ```bash
   # trim a list to the specified range
-  > LTRIM key start stop                  
+  > LTRIM fila_atendimento start stop                  
   
   # Tempo: 
 ```
 
 ```bash
   # remove the last element from the list and returns it
-  > RPOP key                              
+  > RPOP fila_atendimento
   
   # Tempo: 
 ```
@@ -381,14 +393,14 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 
 ```bash
   # remove and get the first element in a list, or block until one is available
-  > BLPOP key [key ...] timeout           
+  > BLPOP fila_atendimento [key ...] timeout           
   
   # Tempo: 
 ```
 
 ```bash
   # remove and get the last element in a list, or block until one is available
-  > BRPOP key [key ...] timeout           
+  > BRPOP fila_atendimento [key ...] timeout           
   
   # Tempo: 
 ```
