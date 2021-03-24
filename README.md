@@ -296,23 +296,23 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, é o primeiro que sai (FIFO - `First in, First out`).
 
 ```bash
-  # adiciona um ou mais itens na `saida` da lista fila_atendimento
+  # adiciona um ou mais itens no `começo` da lista fila_atendimento
   > RPUSH fila_atendimento 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis'
   
   # Os itens são indexados na mesma ordem dos valores dados.
   # 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis'
-  # Tempo: O(1)
+  # Tempo: O(1) para cada elemento
 ```
 
 ```bash
-  # adiciona um ou mais itens na `saida` da lista, SOMENTE SE a chave já existir E armazenar uma lista
+  # adiciona um ou mais itens no `começo` da lista, SOMENTE SE a chave já existir E armazenar uma lista
   > RPUSHX fila_atendimento 'Pedro Cabral'           
   # 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis' 'Pedro Cabral'
-  # Tempo: O(1)
+  # Tempo: O(1) para cada elemento
 ```
 
 ```bash
-  # adiciona um ou mais itens na `entrada` da lista
+  # adiciona um ou mais itens na `final` da lista
   > LPUSH fila_atendimento 'Joe Biden'
   
   # 'Joe Biden' 'Jose Eduardo' 'Maria da Silva' 'Renato Casagrande' 'Daylla Reis' 'Pedro Cabral'
@@ -323,7 +323,7 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
   > LPUSH fila_atendimento2 'Jose Eduardo' 'Maria da Silva'
   > LRANGE fila_atendimento2 0 1 # 'Maria da Silva' 'Jose Eduardo' 
   
-  # Tempo: O(1)
+  # Tempo: O(1) para cada elemento
 ```
 
 ```bash
@@ -348,49 +348,53 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
   # adiciona um elemento antes ou depois de um elemento da lista
   > LINSERT fila_atendimento BEFORE 'Jose Eduardo' 'Joana Dark'
   "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+  
   > LINSERT fila_atendimento AFTER 'Jose Eduardo' 'Maria Padilha'
   "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
-  # Tempo: 
+
+  # Tempo: O(1) {se adicionar na saida da lista}  e O(n) {se adicionar na entrada da lista}
 ```
 
 ```bash
-  # return the current length of the list
+  # recupera o tamanho da fila
   > LLEN fila_atendimento                            
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
-  # remove the first element from the list and returns it
+  # atomicamente remove o primeiro elemento da lista e retorna ele
   > LPOP fila_atendimento
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
-  # set the value of an element in a list by its index
-  > LSET fila_atendimento index value                  
-  
-  # Tempo: 
+  # seta o valor de um item da  lista dado o seu index e valor
+  > LSET fila_atendimento 2 'Jose Eduardo Almeida'
+  # "Joe Biden" "Joana Dark" "Jose Eduardo Almeida" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+
+  # Tempo: O(n) e O(1) se for no inicio ou final da lista
 ```
 
 ```bash
-  # trim a list to the specified range
-  > LTRIM fila_atendimento start stop                  
-  
-  # Tempo: 
+  # corta uma lista de forma que ele compreenda somente os itens dado o alcance especificado
+  > LTRIM fila_atendimento 1 4              
+  # "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis"
+
+  # Tempo: O(n)
 ```
 
 ```bash
-  # remove the last element from the list and returns it
+  # remove o ÚLTIMO elemento da lista e retorna ele
   > RPOP fila_atendimento
   
-  # Tempo: 
+  # Tempo: O(n)
 ```
 
 ```bash
-  # remove the last element in a list, prepend it to another list and return it
-  > RPOPLPUSH source destination          
+  # atomicamente remove o ultimo elemento em uma lista, e adiciona no inicio de uma outra lista
+  > RPOPLPUSH fila_atendimento fila_atendimento_prioritario         
   
   # Tempo: 
 ```
@@ -572,3 +576,14 @@ UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages poste
   
   # Tempo: 
 ```
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1S3V0C209Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1S3V0C209Z');
+</script>
