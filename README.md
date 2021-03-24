@@ -293,7 +293,7 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 
 ## Manipulando Lists.
 
-Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, é o primeiro que sai (FIFO - `First in, First out`).
+Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, é o primeiro que sai (FIFO - `First in, First out`). Diferente de um vetor padrão, a contagem começa da direta pra esquerda.
 
 ```bash
   # adiciona um ou mais itens no `começo` da lista fila_atendimento
@@ -363,13 +363,6 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```
 
 ```bash
-  # atomicamente remove o primeiro elemento da lista e retorna ele
-  > LPOP fila_atendimento
-  
-  # Tempo: O(1)
-```
-
-```bash
   # seta o valor de um item da  lista dado o seu index e valor
   > LSET fila_atendimento 2 'Jose Eduardo Almeida'
   # "Joe Biden" "Joana Dark" "Jose Eduardo Almeida" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
@@ -386,31 +379,38 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```
 
 ```bash
-  # remove o ÚLTIMO elemento da lista e retorna ele
+  # atomicamente remove o PRIMEIRO elemento da lista e retorna ele (ÚLTIMO da fila)
+  > LPOP fila_atendimento
+  
+  # Tempo: O(1)
+```
+
+```bash
+  # remove o ÚLTIMO elemento da lista e retorna ele (PRIMEIRO da fila)
   > RPOP fila_atendimento
   
   # Tempo: O(n)
 ```
 
 ```bash
-  # atomicamente remove o ultimo elemento em uma lista, e adiciona no inicio de uma outra lista
+  # atomicamente remove o ultimo elemento em uma lista (PRIMEIRO da fila), e adiciona no inicio de uma outra lista (ÚLTIMO da fila)
   > RPOPLPUSH fila_atendimento fila_atendimento_prioritario         
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
-  # remove and get the first element in a list, or block until one is available
+  # versào blocking do LPOP. Remove e retorna o primeiro elemento da lista (ultimo da fila)
   > BLPOP fila_atendimento [key ...] timeout           
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
-  # remove and get the last element in a list, or block until one is available
+  # versào blocking do  RPOP. Remove e retorna o último elemento da lista (primeiro da fila)
   > BRPOP fila_atendimento [key ...] timeout           
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 --------------------------
