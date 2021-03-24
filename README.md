@@ -2,6 +2,8 @@
 
 # Redis em 5 minutos
 
+Este conteúdo tem como objetivo ensinar Redis á desenvolvedores de língua portuguesa que não dominam principalmente a língua inglesa.
+
 ## Índice de navegação:
 
 - [**O que é o Redis?**](#oquee)
