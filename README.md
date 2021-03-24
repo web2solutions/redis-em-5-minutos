@@ -408,15 +408,23 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```
 
 ```bash
-  # versào blocking do LPOP. Remove e retorna o primeiro elemento da lista (ultimo da fila)
-  > BLPOP fila_atendimento [key ...] timeout           
+  # versào blocking do LPOP. Remove e retorna o primeiro elemento da 
+  # lista (ultimo da fila).
+  # Se o comando não encontrar nenhum item disponível em nenhuma das listas, 
+  # ele bloqueará até alguém executar um LPUSH ou RPUSH em alguma das chaves
+  # 0 é o timeout
+  > BLPOP fila_atendimento fila_atendimento_prioritario 0       
   
   # Tempo: O(1)
 ```
 
 ```bash
-  # versào blocking do  RPOP. Remove e retorna o último elemento da lista (primeiro da fila)
-  > BRPOP fila_atendimento [key ...] timeout           
+  # versào blocking do  RPOP. Remove e retorna o último elemento de multiplas 
+  # listas (primeiro da fila).
+  # Se o comando não encontrar nenhum item disponível em nenhuma das listas, 
+  # ele bloqueará até alguém executar um LPUSH ou RPUSH em alguma das chaves
+  # 0 é o timeout
+  > BRPOP fila_atendimento fila_atendimento_prioritario 0
   
   # Tempo: O(1)
 ```
