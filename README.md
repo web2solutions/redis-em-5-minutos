@@ -349,10 +349,12 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```bash
   # adiciona um elemento antes ou depois de um elemento da lista
   > LINSERT fila_atendimento BEFORE 'Jose Eduardo' 'Joana Dark'
-  "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+  # "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria da Silva" "Renato Casagrande" 
+  # "Daylla Reis" "Pedro Cabral"
   
   > LINSERT fila_atendimento AFTER 'Jose Eduardo' 'Maria Padilha'
-  "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+  # "Joe Biden" "Joana Dark" "Jose Eduardo" "Maria Padilha" "Maria da Silva" 
+  # "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
 
   # Tempo: 
   # O(1) {se adicionar na saida da lista}  
@@ -369,7 +371,8 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 ```bash
   # seta o valor de um item da  lista dado o seu index e valor
   > LSET fila_atendimento 2 'Jose Eduardo Almeida'
-  # "Joe Biden" "Joana Dark" "Jose Eduardo Almeida" "Maria Padilha" "Maria da Silva" "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
+  # "Joe Biden" "Joana Dark" "Jose Eduardo Almeida" "Maria Padilha" "Maria da Silva" 
+  # "Renato Casagrande" "Daylla Reis" "Pedro Cabral"
 
   # Tempo: O(n) e O(1) se for no inicio ou final da lista
 ```
