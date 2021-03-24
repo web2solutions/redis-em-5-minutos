@@ -264,20 +264,61 @@ BITCOUNT key [start end]          # count set bits in a string
 
 
 
-RPUSH key value [value ...]           # put the new value at the end of the list
-RPUSHX key value                      # append a value to a list, only if the exists
-LPUSH key value [value ...]           # put the new value at the start of the list
-LRANGE key start stop                 # give a subset of the list
-LINDEX key index                      # get an element from a list by its index
-LINSERT key BEFORE|AFTER pivot value  # insert an element before or after another element in a list
-LLEN key                              # return the current length of the list
-LPOP key                              # remove the first element from the list and returns it
-LSET key index value                  # set the value of an element in a list by its index
-LTRIM key start stop                  # trim a list to the specified range
-RPOP key                              # remove the last element from the list and returns it
-RPOPLPUSH source destination          # remove the last element in a list, prepend it to another list and return it
-BLPOP key [key ...] timeout           # remove and get the first element in a list, or block until one is available
-BRPOP key [key ...] timeout           # remove and get the last element in a list, or block until one is available
+```bash
+  RPUSH key value [value ...]           # put the new value at the end of the list
+```
+
+```bash
+  RPUSHX key value                      # append a value to a list, only if the exists
+```
+
+```bash
+  LPUSH key value [value ...]           # put the new value at the start of the list
+```
+
+```bash
+  LRANGE key start stop                 # give a subset of the list
+```
+
+```bash
+  LINDEX key index                      # get an element from a list by its index
+```
+
+```bash
+  LINSERT key BEFORE|AFTER pivot value  # insert an element before or after another element in a list
+```
+
+```bash
+  LLEN key                              # return the current length of the list
+```
+
+```bash
+  LPOP key                              # remove the first element from the list and returns it
+```
+
+```bash
+  LSET key index value                  # set the value of an element in a list by its index
+```
+
+```bash
+  LTRIM key start stop                  # trim a list to the specified range
+```
+
+```bash
+  RPOP key                              # remove the last element from the list and returns it
+```
+
+```bash
+  RPOPLPUSH source destination          # remove the last element in a list, prepend it to another list and return it
+```
+
+```bash
+  BLPOP key [key ...] timeout           # remove and get the first element in a list, or block until one is available
+```
+
+```bash
+  BRPOP key [key ...] timeout           # remove and get the last element in a list, or block until one is available
+```
 
 
 ## Manipulando Sets.
