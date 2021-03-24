@@ -124,7 +124,7 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
 ```
 
 
-# Manipulando Strings.
+## Manipulando Strings.
 
 
 ```bash
@@ -153,18 +153,6 @@ Os fluxos do Redis oferecem suporte a consultas de intervalo por ID.
   GETSET chave valor
 
   # Tempo: O(1)
-```
-
-```bash
-  # RECUPERA todas as chaves dado o padrão glob fornecido.
-  KEYS glob
-  
-  # Exemplos:
-  # h?llo retornará hello hallo hhllo
-  # h*llo retornará hllo heeeello
-  # h[ae]llo retornará hello e hallo, mas não hillo
-
-  # Tempo: O(n)
 ```
 
 ```bash
@@ -272,7 +260,7 @@ BITCOUNT key [start end]          # count set bits in a string
 
 
 
-# Lists.
+## Manipulando Lists.
 
 
 
@@ -292,7 +280,7 @@ BLPOP key [key ...] timeout           # remove and get the first element in a li
 BRPOP key [key ...] timeout           # remove and get the last element in a list, or block until one is available
 
 
-# Sets.
+## Manipulando Sets.
 
 
 SADD key member [member ...]     # add the given value to the set
@@ -306,7 +294,7 @@ SMOVE source destination member  # move a member from one set to another
 SPOP key [count]                 # remove and return one or multiple random members from a set
 
 
-# Sorted Sets
+## Manipulando Sorted Sets
 
 
 ZADD key [NX|XX] [CH] [INCR] score member [score member ...]  # add one or more members to a sorted set, or update its score if it already exists
@@ -324,7 +312,7 @@ ZSCORE key member                   # get the score associated with the given mm
 ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of members in a sorted set, by score
 
 
-# Hashes
+## Manipulando Hashes
 
 
 
@@ -344,7 +332,7 @@ HSTRLEN key field            # get the length of the value of a hash field
 HVALS key                    # get all the values in a hash
 
 
-# HyperLogLog
+## Manipulando HyperLogLog
 
 
 PFADD key element [element ...]  # add the specified elements to the specified HyperLogLog
@@ -353,7 +341,7 @@ PFCOUNT key [key ...]            # return the approximated cardinality of the se
 PFMERGE destkey sourcekey [sourcekey ...]  # merge N HyperLogLogs into a single one
 
 
-# Publication & Subscription
+## Manipulando Publicação / Assinatura
 
 
 PSUBSCRIBE pattern [pattern ...]             # listen for messages published to channels matching the given patterns
@@ -364,16 +352,7 @@ SUBSCRIBE channel [channel ...]              # listen for messages published to 
 UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages posted to the given channels
 
 
-# Other Commands
-
-
-KEYS pattern  # find all keys matching the given pattern
-
-
-
-
-
-
+## Manipulando Streams
 
 ```bash
   # * auto generated id
@@ -386,3 +365,20 @@ KEYS pattern  # find all keys matching the given pattern
   > XLEN meustream 
   # (integer) 1
 ```
+
+## Outros comandos
+
+```bash
+  # RECUPERA todas as chaves dado o padrão glob fornecido.
+  KEYS glob
+  
+  # Exemplos:
+  # h?llo retornará hello hallo hhllo
+  # h*llo retornará hllo heeeello
+  # h[ae]llo retornará hello e hallo, mas não hillo
+
+  # Tempo: O(n)
+```
+
+
+
