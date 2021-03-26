@@ -558,6 +558,9 @@ Conjuntos ordenados
   > ZRANGE hackers 2 5
   # "Claude Shannon" "Alan Kay" "Richard Stallman" "Yukihiro Matsumoto"
 
+  > ZRANGE hackers 2 5 WITHSCORES
+  # 1940 "Alan Kay" 1953 "Richard Stallman" 1965 "Yukihiro Matsumoto" 1916 "Claude Shannon"
+
   # Tempo: O(log(N)+M)
 ```
 ```bash
@@ -575,21 +578,27 @@ Conjuntos ordenados
   
   # Tempo: O(M*log(N)) 
   # onde N é número de elementos presente no conjunto
-  # onde M é o número de  elementos to be removed
+  # onde M é o número de  elementos a serem removidos
 ```
 
 ```bash
   # Remove todos os membros de um conjunto ordenado dentro dos indexes especificados
-    > ZREMRANGEBYRANK key start stop      # remove all members in a sorted set within the given indexes
-  
-  # Tempo: O(1)
+  > ZREMRANGEBYRANK hackers 1 3
+  # "Grace Hopper" "Richard Stallman" "Yukihiro Matsumoto"
+
+  # Tempo: O(log(N)+M)
+  # onde N é número de elementos presente no conjunto
+  # onde M é o número de  elementos removidos na operação
 ```
 
 ```bash
-  # 
-    > ZREMRANGEBYSCORE key min max        # remove all members in a sorted set, by index, with scores ordered from high to low
+  # Remove todos os membros de um conjunto ordenado, com scores compreendidos 
+  # entre mínimo e máximo (inclusivo)
+  > ZREMRANGEBYSCORE hackers min max
   
-  # Tempo: O(1)
+  # Tempo: O(log(N)+M)
+  # onde N é número de elementos presente no conjunto
+  # onde M é o número de  elementos removidos na operação
 ```
 
 ```bash
