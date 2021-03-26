@@ -499,12 +499,13 @@ Conceito básico: como em um conjunto numérico, items não se repetem nunca.
   > SINTER amigos_do_joao amigos_da_maria
   # 'Daylla'
 
-  # Tempo: O(N*M) no pior cenário, onde N é a cardinalidade do menor grupo e M é o número de conjuntos
+  # Tempo: O(N*M) no pior cenário, onde N é a cardinalidade do menor grupo
+  #  e M é o número de conjuntos
 ```
 
 ```bash
   # Move um item de um conjunto para outro conjunto
-  > SMOVE amigos_do_joao amigos_da_maria 'Jose'  # move a member from one set to another
+  > SMOVE amigos_do_joao amigos_da_maria 'Jose'
   
   # Tempo: O(1)
 ```
@@ -523,34 +524,37 @@ Conceito básico: como em um conjunto numérico, items não se repetem nunca.
 Conjuntos ordenados
 
 ```bash
-  # add one or more members to a sorted set, or update its score if it already exists
-    > ZADD key [NX|XX] [CH] [INCR] score member [score member ...]  
+  # adiciona um ou mais itens ao conjunto ordenado, caso já exista, atualiza o score
+  > ZADD hackers 1940 "Alan Kay" 1906 "Grace Hopper" 1953 "Richard Stallman" 1965 "Yukihiro Matsumoto" 1916 "Claude Shannon"
+  
+  # Tempo: O(log(N)) para cada item adicionado
+```
+```bash
+  # recupera o número de itens em um grupo ordenado
+  > ZCARD hackers
+  # 5
   
   # Tempo: O(1)
 ```
 ```bash
-  # 
-    > ZCARD key                           # get the number of members in a sorted set
+  # conta os membros de um grupo ordenado dentro do intervalo de scores especificado
+  > ZCOUNT hackers 1906 1930
+  #2
   
-  # Tempo: O(1)
+  # Tempo: O(log(N))
 ```
 ```bash
-  # 
-    > ZCOUNT key min max                  # count the members in a sorted set with scores within the given values
-  
-  # Tempo: O(1)
+  # incrementa o score de um membro em um grupo ordenado
+  > ZINCRBY hackers 1 "Alan Kay"
+  # 1941 "Alan Kay" 1906 "Grace Hopper" 1953 "Richard Stallman" 1965 "Yukihiro Matsumoto" 1916 "Claude Shannon"
+
+  # Tempo: O(log(N))
 ```
 ```bash
-  # 
-    > ZINCRBY key increment member        # increment the score of a member in a sorted set
+  # recupera um sub conjunto de um conjunto ordenado dado posição inicial e final
+  > ZRANGE hackers start stop [WITHSCORES]  # returns a subset of the sorted set
   
-  # Tempo: O(1)
-```
-```bash
-  # 
-    > ZRANGE key start stop [WITHSCORES]  # returns a subset of the sorted set
-  
-  # Tempo: O(1)
+  # Tempo: O(log(N)+M)
 ```
 ```bash
   # 
