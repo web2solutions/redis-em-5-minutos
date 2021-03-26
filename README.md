@@ -602,46 +602,56 @@ Conjuntos ordenados
 ```
 
 ```bash
-  # 
-    > ZSCORE key member                   # get the score associated with the given mmeber in a sorted set
+  # recupera o score associado á um membro do conjunto ordenado
+  > ZSCORE hackers "Grace Hopper" 
+  # 1906
   
   # Tempo: O(1)
 ```
 
 ```bash
-  # 
-    > ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]  # return a range of members in a sorted set, by score
+  # retorna um subconjunto do conjunto ordenado baseado no score
+  # ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]
+  > ZRANGEBYSCORE hackers 0 2000
+  # "Grace Hopper" "Claude Shannon" "Alan Kay" "Richard Stallman" "Yukihiro Matsumoto"
   
-  # Tempo: O(1)
+  # Tempo: O(log(N)+M)
+  # onde N é número de elementos presente no conjunto
+  # onde M é o número de  elementos removidos na operação
 ```
 --------------------------
 
 
 ## Manipulando Hashes
 
+Mapas / Dicionários
+
 
 ```bash
-  # 
-    > HGET key field          # get the value of a hash field
+  # Seta o valor de uma chave em um hash
+  > HSET perfil_do_eduardo nome 'José Eduardo Almeida'
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-    > HGETALL key             # get all the fields and values in a hash
+  # Recupera o valor do campo de uma chave especificada de um hash
+  > HGET perfil_do_eduardo nome
+  # 'José Eduardo Almeida'
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-HSET key field value    # set the string value of a hash field
-  
-  # Tempo: O(1)
+  # Recupera todos campos e chaves  de um hash
+  > HGETALL perfil_do_eduardo
+  # "nome" "José Eduardo"
+
+  # Tempo: O(N)
 ```
+
 
 
 ```bash
