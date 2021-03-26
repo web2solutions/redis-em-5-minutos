@@ -655,76 +655,80 @@ Mapas / Dicionários
 
 
 ```bash
-  # 
-    > HSETNX key field value  # set the string value of a hash field, only if the field does not exists
+  # set o valor de um capo do hash, somente se o campo não existir
+  > HSETNX perfil_do_eduardo nome 'James'
+  # HGETALL perfil_do_eduardo
+  # "nome" "José Eduardo"
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-    > HMSET key field value [field value ...]  # set multiple fields at once
+  # set o valor de multiplos campos de um hash
+  > HMSET perfil_do_eduardo idade '36' filha 'Daylla'
+  
+  # Tempo: O(N)
+```
+
+
+```bash
+  # incrementa o valor de um campo de um hash dado um numero como parametro
+  > HINCRBY perfil_do_eduardo idade 1
+  # 37 
+
+  # Tempo: O(1)
+```
+
+
+```bash
+  # Remove um ou mais itens de um hash
+  > HDEL chave campo1 campo2
+  
+  # Tempo: O(N)
+```
+
+
+```bash
+  # checa a existencia de um campo em um hash
+  > HEXISTS perfil_do_eduardo nome
+  # 1
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-    > HINCRBY key field increment  # increment value in hash by X
+  # recupera uma  lista com o nome de todos os campos de um hash
+  > HKEYS perfil_do_eduardo
+  # nome idade filha
+  
+  # Tempo: O(N)
+```
+
+
+```bash
+  # recupera o numero de campos dentro do hash
+    > HLEN perfil_do_eduardo
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-    > HDEL key field [field ...]   # delete one or more hash fields
+  # recupera o tamanho da string armazenada como valor do campo de um hash
+  > HSTRLEN perfil_do_eduardo nome
   
   # Tempo: O(1)
 ```
 
 
 ```bash
-  # 
-    > HEXISTS key field            # determine if a hash field exists
+  # recupera uma lista com os valores associado a todos os campos de um hash 
+  > HVALS perfil_do_eduardo
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
-
-
-```bash
-  # 
-    > HKEYS key                    # get all the fields in a hash
-  
-  # Tempo: O(1)
-```
-
-
-```bash
-  # 
-    > HLEN key                     # get all the fields in a hash
-  
-  # Tempo: O(1)
-```
-
-
-```bash
-  # 
-    > HSTRLEN key field            # get the length of the value of a hash field
-  
-  # Tempo: O(1)
-```
-
-
-```bash
-  # 
-    > HVALS key                    # get all the values in a hash
-  
-  # Tempo: O(1)
-```
-
 
 
 --------------------------
@@ -732,24 +736,26 @@ Mapas / Dicionários
 ## Manipulando HyperLogLog
 
 ```bash
-  # 
-    > PFADD key element [element ...]  # add the specified elements to the specified HyperLogLog
+  # Adiciona os itens especificados á um hyperloglog
+  > PFADD chave elemento1 elemento2
   
-  # Tempo: O(1)
+  # Tempo: O(1) para cada elemento
 ```
 
 ```bash
-  # 
-    > PFCOUNT key [key ...]            # return the approximated cardinality of the set(s) observed by the HyperLogLog at key's)
+  # recupera a cardinalidade aproximada de um conjunto 
+  # observado pelo hyperloglog na chave especifica
+  > PFCOUNT chave1 chave2
   
-  # Tempo: O(1)
+  # Tempo: O(1) para uma chave e O(n) para multiplas chaves
 ```
 
 ```bash
-  # 
-    > PFMERGE destkey sourcekey [sourcekey ...]  # merge N HyperLogLogs into a single one
+  # Combina multiples valores de hyperlolog em um valor unique que será aproximado 
+  # á cardinalidade da união dos conjuntos observados
+  > PFMERGE conjunto_destino conjunto_base1 conjunto_base2
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
 
 
@@ -759,45 +765,48 @@ Mapas / Dicionários
 ## Manipulando Publicação / Assinatura
 
 ```bash
-  # 
-    > PSUBSCRIBE pattern [pattern ...]             # listen for messages published to channels matching the given patterns
+  # Escuta por todas as mensagens enviadas em canais que correspondam aos padrões fornecidos
+  > PSUBSCRIBE padrao1 padrao2
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
 
 ```bash
-  # 
-    > PUBSUB subcommand [argument [argument ...]]  # inspect the state of the Pub/Sub subsystem
+  # comando de introspecção que permite inspecionar o estado do subsistema Pub / Sub. 
+  #  É composto de subcomandos documentados separadamente
+  > PUBSUB subcomando argumento1 argumento2
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
 
 ```bash
-  # 
-    > PUBLISH channel message                      # post a message to a channel
+  # Envia uma mensagem para o canal especificado 
+  > PUBLISH canal mensagem
   
-  # Tempo: O(1)
+  # Tempo: O(N+M)
+  # onde N é o número de clientes assinantes e M é o total de padroes assinantes
 ```
 
 ```bash
-  # 
-    > PUNSUBSCRIBE [pattern [pattern ...]]         # stop listening for messages posted to channels matching the given patterns
+  # Para de Escutar as mensagens enviadas em canais que correspondam aos padrões fornecidos
+  > PUNSUBSCRIBE padrao1 padrao2
   
-  # Tempo: O(1)
+  # Tempo: O(N+M)
+  # onde N é o número de clientes assinantes e M é o total de padroes assinantes
 ```
 
 ```bash
-  # 
-    > SUBSCRIBE channel [channel ...]              # listen for messages published to the given channels
+  # Escutar por mensagens em um canal especificado
+  > SUBSCRIBE canal1 canal2
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
 
 ```bash
-  # 
-    > UNSUBSCRIBE [channel [channel ...]]          # stop listening for messages posted to the given channels
+  # Escutar por mensagens em um canal especificado
+  > UNSUBSCRIBE canal1 canal2
   
-  # Tempo: O(1)
+  # Tempo: O(N)
 ```
 
 
@@ -867,7 +876,7 @@ Mapas / Dicionários
   # Checa a existência de uma chave dada
   > EXISTS chave
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 
@@ -875,15 +884,47 @@ Mapas / Dicionários
   # Assiste os comandos ao vivo. Seja cuidadoso ao usar em produção.
   > MONITOR
   
-  # Tempo: 
 ```
 
 ```bash
   # recupera informações sobre o Redis
   > INFO
   
-  # Tempo: 
 ```
+
+
+```bash
+  # Faz o dum de um banco em background
+  > BGSAVE
+   
+```
+
+
+```bash
+  # Lista clientes conectados
+  > CLIENT LIST
+  
+  # Tempo: O(N)
+```
+
+
+```bash
+  # Termina a conexao de um cliente
+  > CLIENT KILL <IP>:<porta>
+  
+  # Tempo: O(N)
+```
+
+
+
+```bash
+  # Recupera os ultimos 25 ultimos comandos mais  lentos
+  > SLOWLOG RESET 
+  # espera por um tempo
+  SLOWLOG GET 25
+  
+```
+
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
