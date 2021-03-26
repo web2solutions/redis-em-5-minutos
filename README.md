@@ -546,31 +546,40 @@ Conjuntos ordenados
 ```bash
   # incrementa o score de um membro em um grupo ordenado
   > ZINCRBY hackers 1 "Alan Kay"
-  # 1941 "Alan Kay" 1906 "Grace Hopper" 1953 "Richard Stallman" 1965 "Yukihiro Matsumoto" 1916 "Claude Shannon"
+  # 1941 "Alan Kay" 1906 "Grace Hopper" 1953 "Richard Stallman" 
+  # 1965 "Yukihiro Matsumoto" 1916 "Claude Shannon"
 
   # Tempo: O(log(N))
 ```
 ```bash
   # recupera um sub conjunto de um conjunto ordenado dado posição inicial e final
-  > ZRANGE hackers start stop [WITHSCORES]  # returns a subset of the sorted set
-  
+  # A ordem dos elementos se dá do menor para o maior score
+  # > ZRANGE hackers start stop [WITHSCORES]  
+  > ZRANGE hackers 2 5
+  # "Claude Shannon" "Alan Kay" "Richard Stallman" "Yukihiro Matsumoto"
+
   # Tempo: O(log(N)+M)
 ```
 ```bash
-  # 
-    > ZRANK key member                    # determine the index of a member in a sorted set
-  
-  # Tempo: O(1)
+  # recupera o index de um membro em um conjunto ordenado
+  > ZRANK hackers "Alan Kay"
+  # 2
+
+  # Tempo: O(log(N))
 ```
 ```bash
-  # 
-    > ZREM key member [member ...]        # remove one or more members from a sorted set
+  # Remove um ou mais  itens  de um conjunto ordenado
+  > ZREM hackers "Alan Kay"
+  # 1906 "Grace Hopper" 1953 "Richard Stallman" 1965 "Yukihiro Matsumoto" 
+  # 1916 "Claude Shannon"
   
-  # Tempo: O(1)
+  # Tempo: O(M*log(N)) 
+  # onde N é número de elementos presente no conjunto
+  # onde M é o número de  elementos to be removed
 ```
 
 ```bash
-  # 
+  # Remove todos os membros de um conjunto ordenado dentro dos indexes especificados
     > ZREMRANGEBYRANK key start stop      # remove all members in a sorted set within the given indexes
   
   # Tempo: O(1)
