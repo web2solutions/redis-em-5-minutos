@@ -11,8 +11,8 @@ Conteúdo em português com o objetivo de mitigar o uso do Redis de forma simple
   1. [`Sequência de caracteres`](#string)
   2. [`Mapa / Dicionário`](#hash)
   3. [`Lista`](#list)
-  4. [`Grupo`](#set)
-  5. [`Grupo Ordenado`](#sortedset)
+  4. [`Conjunto`](#set)
+  5. [`Conjunto Ordenado`](#sortedset)
   6. [`Index Geo Espacial`](#geo)
   7. [`Mapa de bits`](#bitmap)
   8. [`HyperLogLog`](#hyper)
@@ -21,8 +21,8 @@ Conteúdo em português com o objetivo de mitigar o uso do Redis de forma simple
   1. [`Sequência de caracteres`](#mstring)
   2. [`Mapa / Dicionário`](#mhash)
   3. [`Lista`](#mlist)
-  4. [`Grupo`](#mset)
-  5. [`Grupo Ordenado`](#msortedset)
+  4. [`Conjunto`](#mset)
+  5. [`Conjunto Ordenado`](#msortedset)
   6. [`Index Geo Espacial`](#mgeo)
   7. [`Mapa de bits`](#mbitmap)
   8. [`HyperLogLog`](#mhyper)
@@ -82,19 +82,19 @@ Tempo: O(1) para adicionar ou remover itens mesmo com milhões de items
 Exemplo de Uso: Filas. Facilita a implementação do padrão `assíncrono` `produtor-consumidor`.
 
 
-### <a name="set"></a> Set (Grupo)
+### <a name="set"></a> Set (Conjunto)
 
-Grupo desordenado de Strings únicas.
+Conjunto desordenado de Strings únicas.
 Oferece comandos para `Diferença`, `Interseção` e `União`
 São mais perfomáticos do que `hash` para solucionar problemas de `filiação`, por exemplo: `Esse item está presente nesse conjunto de dados?`
 
-Exemplo de Uso: `Interesses` de um consumidor, `Grupo de Amigos` de um usuário.
+Exemplo de Uso: `Interesses` de um consumidor, `Conjunto de Amigos` de um usuário.
 
 
 
 ### <a name="sortedset"></a> Sorted Set with range queries
 
-Grupo ordenado por `classificação` de Strings únicas. Ao armazenar um valor, é associado a sua pontuaçào que é um valor.
+Conjunto ordenado por `classificação` de Strings únicas. Ao armazenar um valor, é associado a sua pontuaçào que é um valor.
 
 `Alta performance` em `ordenamento`
 
@@ -105,7 +105,7 @@ Exemplo de Uso: Coleção de dados do tipo `série temporal`, lances de um leil�
 
 ### <a name="geo"></a> Geospatial index
 
-É uma `forma especial` da implementação de `Grupo Ordenado`, onde a classificação númerica do item é uma coordenada geográfica.
+É uma `forma especial` da implementação de `Conjunto Ordenado`, onde a classificação númerica do item é uma coordenada geográfica.
 
 Muito rápido para implementação de buscas dentro de uma área específica.
 
@@ -222,28 +222,37 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
   # recupera o valor de múltiplas chaves
   > MGET chave1 chave2
   
-  # Tempo: 
+  # Tempo: O(1) para cada chave
 ```
 
 ```bash
-  # overwrite part of a string at key starting at the specified offset
-  > SETRANGE key offset value         
+  # substituir parte da string armazenada na chave na posição especificada
+  # SET chave "Hello World"
+  > SETRANGE chave 6 "Redis"
+  # "Hello Redis"
   
-  # Tempo: 
+  # Tempo: O(1)
 ```
 
 ```bash
-  # get a substring value of a key and return its old value
-  > GETRANGE key value                
+  # recupera uma substring do valor armazenado na chave, determinada pelas posições 
+  # inicio e fim (ambos inclusivos). 
+  # -1 no fim significa até o último char
+  # -2 no fim significa até o penúltimo char
+  > GETRANGE chave inicio fim
+  # Ex: 
+  # SET chave "Isto é uma substring"
+  # GETRANGE chave 0 3
+  # "Isto"
   
-  # Tempo: 
+  # Tempo: O(n)
 ```
 
 ```bash
-  # count set bits in a string
+  # Conta o número de conjunto de bits em uma string.
   > BITCOUNT key [start end]          
   
-  # Tempo: 
+  # Tempo: O(n)
 ```
 
 
@@ -292,6 +301,8 @@ Os fluxos de dados do Redis oferecem suporte a consultas de intervalo por ID.
 
 
 ## Manipulando Lists.
+
+Listas
 
 Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, é o primeiro que sai (FIFO - `First in, First out`). Diferente de um vetor padrão, a contagem começa da direta pra esquerda.
 
@@ -433,65 +444,74 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 
 ## Manipulando Sets.
 
+Conjuntos
+
+Conceito básico: como em um conjunto numérico, items não se repetem nunca.
+
 ```bash
-  # 
-    > SADD key member [member ...]     # add the given value to the set
+  # Adiciona um ou mais membros em um conjunto 
+  > SADD amigos_do_joao 'Jose' 'Pedro' 'Daylla' 'James'
+
+  > SADD amigos_da_maria 'Lily' 'Luiza' 'Daylla' 'Iza'
+  
+  # Tempo: O(1) para cada item
+```
+
+```bash
+  # recupera o número de membros em um conjunto
+  > SCARD amigos_do_joao
+  # 3
   
   # Tempo: O(1)
 ```
 
 ```bash
-  # 
-    > SCARD key                        # get the number of members in a set
+  # Remove itens do conjunto
+  > SREM amigos_do_joao 'Pedro'
+  # 'Jose' 'Daylla' 'James'
+  # Tempo: O(n)
+```
+
+```bash
+  # Checa se o valor dado é membro do conjunto
+  > SISMEMBER amigos_do_joao 'Daylla'
+  # 1
+  # Tempo: O(1)
+```
+
+```bash
+  # retorna uma lista de todos  os membros do conjunto
+  > SMEMBERS amigos_do_joao
+  
+  # Tempo: O(N) onde N é a cardinalidade do conjunto
+```
+
+```bash
+  # Faz a união de dois ou mais conjuntos
+  > SUNION amigos_do_joao amigos_da_maria
+  # 'Jose' 'Pedro' 'Daylla' 'James' 'Lily' 'Luiza' 'Iza'
+
+  # Tempo: O(N)
+```
+
+```bash
+  # Faz a interseção de dois ou mais conjuntos
+  > SINTER amigos_do_joao amigos_da_maria
+  # 'Daylla'
+
+  # Tempo: O(N*M) no pior cenário, onde N é a cardinalidade do menor grupo e M é o número de conjuntos
+```
+
+```bash
+  # Move um item de um conjunto para outro conjunto
+  > SMOVE amigos_do_joao amigos_da_maria 'Jose'  # move a member from one set to another
   
   # Tempo: O(1)
 ```
 
 ```bash
-  # 
-    > SREM key member [member ...]     # remove the given value from the set
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SISMEMBER myset value            # test if the given value is in the set.
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SMEMBERS myset                   # return a list of all the members of this set
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SUNION key [key ...]             # combine two or more sets and returns the list of all elements
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SINTER key [key ...]             # intersect multiple sets
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SMOVE source destination member  # move a member from one set to another
-  
-  # Tempo: O(1)
-```
-
-```bash
-  # 
-    > SPOP key [count]                 # remove and return one or multiple random members from a set
+  # remove um ou multiplos items do conjunto de forma randômica 
+  > SPOP amigos_do_joao 2
   
   # Tempo: O(1)
 ```
@@ -499,6 +519,8 @@ Conceito básico, listas se comportam como uma fila, onde o primeiro que entra, 
 --------------------------
 
 ## Manipulando Sorted Sets
+
+Conjuntos ordenados
 
 ```bash
   # add one or more members to a sorted set, or update its score if it already exists
